@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StockEval": {
+      "commandName": "Project",
+      "commandLineArgs": "GOOG"
+    }
+  }
+}
