@@ -24,9 +24,10 @@ var response = await client.GetAsync(url);
 var fileResult = await response.Content.ReadAsStreamAsync();
 var outputPath = Path.GetTempPath();
 var dataInputPath = Path.Combine(outputPath, $"{stockId}_history_{fromPeriod}_to_{toPeriod}.csv");
-var outputFileStream = new FileStream(dataInputPath, FileMode.Create);
-fileResult.CopyTo(outputFileStream);
-outputFileStream.Dispose();
+using (var outputFileStream = new FileStream(dataInputPath, FileMode.Create))
+{
+    fileResult.CopyTo(outputFileStream);
+}
 //7) Inicializar contexto de Machine Learning
 var context = new MLContext(seed: 0);
 //8) Convertir el archivo CSV descargado en un elemento en memoria.
